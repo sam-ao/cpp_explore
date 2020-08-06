@@ -1,14 +1,12 @@
 #include "StringTransformBridge.h"
 
-using namespace cppexplore;
-
-void StringTransformBridge::registerTransformer(StringTransformer* transformer)
+void cppexplore::StringTransformBridge::registerTransformer(const cppexplore::IStringTransformer& transformer)
 {
-    transformerMap.insert(std::make_pair(transformer->getType(), transformer));
+    transformerMap.insert(std::make_pair(transformer.getType(), &transformer));
 }
 
-void StringTransformBridge::handleInput(QString inputString, int transformerType)
+void cppexplore::StringTransformBridge::handleInput(const QString& inputString, int transformerType)
 {
-    emit outputGenerated(QString::fromStdString(transformerMap.at(static_cast<StringTransformerTypes::Types>(transformerType))->transform(inputString.toStdString())));
+    emit outputGenerated(QString::fromStdString(transformerMap.at(static_cast<cppexplore::StringTransformerTypes::Types>(transformerType))->transform(inputString.toStdString())));
 }
 

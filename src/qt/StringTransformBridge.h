@@ -11,12 +11,12 @@ namespace cppexplore
         Q_OBJECT
 
     private:
-        std::map<StringTransformerTypes::Types, StringTransformer*> transformerMap;
+        std::map<StringTransformerTypes::Types, const IStringTransformer*> transformerMap;
     public slots:
-        void handleInput(QString input, int transformerType);
+        void handleInput(const QString& input, int transformerType);
     signals:
-        void outputGenerated(QString ouptut);
+        void outputGenerated(const QString& ouptut);
     public:
-        void registerTransformer(StringTransformer* transformer);
+        void registerTransformer(const IStringTransformer& transformer);
     };
 }

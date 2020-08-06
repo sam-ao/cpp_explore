@@ -9,8 +9,6 @@
 #include "transformers/StringUppercaseTransformer.h"
 #include "transformers/StringLowercaseTransformer.h"
 
-using namespace cppexplore;
-
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
@@ -18,13 +16,13 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
-    QtObjectNames qtObjectNames;
+    cppexplore::QtObjectNames qtObjectNames;
     engine.rootContext()->setContextProperty("qtObjectNames", &qtObjectNames);
 
-    OutputReceiver::declareQML();
+    cppexplore::OutputReceiver::declareQML();
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
-    StringTransformerTypes::declareQML();
+    cppexplore::StringTransformerTypes::declareQML();
 
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {
@@ -34,16 +32,17 @@ int main(int argc, char *argv[])
 
     engine.load(url);
 
-    QObject *object = engine.rootObjects().first();
+    auto *object = engine.rootObjects().first();
 
-    std::unique_ptr<StringTransformBridge> bridge(new StringTransformBridge());
+    auto bridge = std::make_unique<cppexplore::StringTransformBridge>();
 
-    std::unique_ptr<StringTransformer> reverseStringTransformer(new StringReverseTransformer());
-    std::unique_ptr<StringTransformer> uppercaseStringTransformer(new StringUppercaseTransformer());
-    std::unique_ptr<StringTransformer> lowercaseStringTransformer(new StringLowercaseTransformer());
-    bridge.get()->registerTransformer(reverseStringTransformer.get());
-    bridge.get()->registerTransformer(uppercaseStringTransformer.get());
-    bridge.get()->registerTransformer(lowercaseStringTransformer.get());
+    auto reverseStringTransformer = std::make_unique<cppexplore::StringReverseTransformer>();
+    auto uppercaseStringTransformer = std::make_unique<cppexplore::StringUppercaseTransformer>();
+    auto lowercaseStringTransformer = std::make_unique<cppexplore::StringLowercaseTransformer>();
+
+    bridge->registerTransformer(*reverseStringTransformer);
+    bridge->registerTransformer(*uppercaseStringTransformer);
+    bridge->registerTransformer(*lowercaseStringTransformer);
 
     QObject::connect(object->findChild<QObject*>(qtObjectNames.inputSubmitName()), SIGNAL(inputSubmit(QString, int)),
                       bridge.get(), SLOT(handleInput(QString, int)));

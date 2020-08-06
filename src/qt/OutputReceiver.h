@@ -8,9 +8,9 @@ namespace cppexplore
     {
         Q_OBJECT
     public slots:
-        void onOutputReceived(QString output);
+        void onOutputReceived(const QString& output);
     signals:
-        void outputRelay(QString output);
+        void outputRelay(const QString& output);
     public:
         explicit OutputReceiver(QObject *parent = nullptr);
         static void declareQML();
