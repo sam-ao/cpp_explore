@@ -1,12 +1,10 @@
 #include "StringUppercaseTransformer.h"
 
-using namespace cppexplore;
-
-std::string StringUppercaseTransformer::transform(std::string input) {
+std::string cppexplore::StringUppercaseTransformer::transform(std::string input) const {
     std::transform(input.begin(), input.end(), input.begin(), ::toupper);
     return input;
 }
 
-StringTransformerTypes::Types StringUppercaseTransformer::getType()  {
-    return StringTransformerTypes::STRING_UPPERCASE;
+cppexplore::StringTransformerTypes::Types cppexplore::StringUppercaseTransformer::getType() const  {
+    return cppexplore::StringTransformerTypes::STRING_UPPERCASE;
 }

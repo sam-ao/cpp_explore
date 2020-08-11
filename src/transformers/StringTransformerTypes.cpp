@@ -1,14 +1,12 @@
 #include "StringTransformerTypes.h"
 
-using namespace cppexplore;
-
-StringTransformerTypes::StringTransformerTypes()
+cppexplore::StringTransformerTypes::StringTransformerTypes()
 {
 }
 
-void StringTransformerTypes::declareQML()
+void cppexplore::StringTransformerTypes::declareQML()
 {
-    qRegisterMetaType<Types>("StringTransformerTypes");
-    qmlRegisterUncreatableType<StringTransformerTypes>("com.cppexplore", 1, 0, "StringTransformerTypes", "Not creatable as it is an enum type");
+    qRegisterMetaType<cppexplore::StringTransformerTypes::Types>("StringTransformerTypes");
+    qmlRegisterUncreatableType<cppexplore::StringTransformerTypes>("com.cppexplore", 1, 0, "StringTransformerTypes", "Not creatable as it is an enum type");
 }
 

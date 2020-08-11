@@ -1,17 +1,15 @@
 #include "OutputReceiver.h"
 
-using namespace cppexplore;
-
-OutputReceiver::OutputReceiver(QObject *parent) : QObject(parent)
+cppexplore::OutputReceiver::OutputReceiver(QObject *parent) : QObject(parent)
 {
 }
 
-void OutputReceiver::onOutputReceived(QString output)
+void cppexplore::OutputReceiver::onOutputReceived(const QString& output)
 {
     emit outputRelay(output);
 }
 
-void OutputReceiver::declareQML()
+void cppexplore::OutputReceiver::declareQML()
 {
     qmlRegisterType<OutputReceiver>("com.cppexplore", 1, 0, "OutputReceiver");
 }

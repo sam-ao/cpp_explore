@@ -1,12 +1,10 @@
 #include "StringLowercaseTransformer.h"
 
-using namespace cppexplore;
-
-std::string StringLowercaseTransformer::transform(std::string input) {
+std::string cppexplore::StringLowercaseTransformer::transform(std::string input) const {
     std::transform(input.begin(), input.end(), input.begin(), ::tolower);
     return input;
 }
 
-StringTransformerTypes::Types StringLowercaseTransformer::getType()  {
-    return StringTransformerTypes::STRING_LOWERCASE;
+cppexplore::StringTransformerTypes::Types cppexplore::StringLowercaseTransformer::getType() const {
+    return cppexplore::StringTransformerTypes::STRING_LOWERCASE;
 }

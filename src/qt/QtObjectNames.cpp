@@ -1,16 +1,17 @@
 #include "QtObjectNames.h"
 
-using namespace cppexplore;
+namespace
+{
+    std::string SUBMIT_INPUT_NAME = "inputSubmit";
+    std::string OUPUT_RECEIVER_NAME = "outputReceiver";
+}
 
-const std::string QtObjectNames::SUBMIT_INPUT_NAME = "inputSubmit";
-const std::string QtObjectNames::OUPUT_RECEIVER_NAME = "outputReceiver";
-
-QString QtObjectNames::inputSubmitName()
+QString cppexplore::QtObjectNames::inputSubmitName()
 {
     return QString::fromStdString(SUBMIT_INPUT_NAME);
 }
 
-QString QtObjectNames::outputReceiverName()
+QString cppexplore::QtObjectNames::outputReceiverName()
 {
     return QString::fromStdString(OUPUT_RECEIVER_NAME);
 }

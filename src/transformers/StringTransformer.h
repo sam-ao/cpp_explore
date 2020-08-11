@@ -4,10 +4,11 @@
 
 namespace cppexplore
 {
-    class StringTransformer
+    class IStringTransformer
     {
         public:
-            virtual std::string transform(std::string input) = 0;
-            virtual StringTransformerTypes::Types getType() = 0;
+            ~IStringTransformer() {};
+            virtual std::string transform(std::string input) const = 0;
+            virtual StringTransformerTypes::Types getType() const = 0;
     };
 }
